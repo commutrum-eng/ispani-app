@@ -1,0 +1,18 @@
+[build]
+  command   = "npm run build"
+  publish   = ".next"
+
+# Required for Next.js App Router + middleware on Netlify
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# Redirect all routes to Next.js (handled by the plugin)
+[[redirects]]
+  from   = "/*"
+  to     = "/.netlify/functions/___netlify-handler"
+  status = 200
+
+# Environment variable hints (set real values in Netlify dashboard)
+[build.environment]
+  NEXT_TELEMETRY_DISABLED = "1"
+  NODE_VERSION = "20"
